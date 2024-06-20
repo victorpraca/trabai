@@ -28,7 +28,7 @@ Livro *copyLivro(Livro *liv){
 	return createLivro(liv->titulo, liv->numeroPaginas, liv->preco);
 }
 
-void desallocate_livro(Livro **livro_ref){
+void deallocate_livro(Livro **livro_ref){
 	Livro *livro_fav = *livro_ref;
 	free(livro_fav);
 	*livro_ref = NULL;
