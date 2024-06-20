@@ -1,0 +1,89 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <locale.h>
+
+typedef struct _livro{
+	char titulo[100];
+	int numeroPaginas;
+	float preco;	
+}Livro;
+
+typedef struct _aluno{
+	char nome[100];
+	int idade;
+	Livro *livro_fav;	
+}Aluno;
+
+Livro *createLivro(char *titulo, int numeroPaginas, float preco){
+	Livro *l = calloc(1, sizeof(Livro));
+	strcpy(l->titulo, titulo);
+	l->numeroPaginas = numeroPaginas;
+	l->preco = preco;
+	
+	return l;
+}
+
+Livro *copyLivro(Livro *liv){
+	return createLivro(liv->titulo, liv->numeroPaginas, liv->preco);
+}
+
+void desallocate_livro(Livro **livro_ref){
+	Livro *livro_fav = *livro_ref;
+	free(livro_fav);
+	*livro_ref = NULL;
+}
+
+void update_livro(Livro *livro_ref, float novoPreco){
+	livro_ref->preco = novoPreco;
+}
+void display_livro(Livro *livro){
+	printf("Livro: %s\nNúmero de páginas: %d\n Preço: %.2f", livro->titulo, livro->numeroPaginas, livro->preco);	
+}
+
+Aluno *createAluno(char *nome, int idade, Livro *liv){
+	Aluno *a = calloc(1, sizeof(Aluno));
+	strcpy(a->nome, nome);
+	a->idade = idade;
+	a->livro_fav = copyLivro(liv);
+	
+	return a; 
+}
+
+void deallocate_aluno(Aluno **aluno_ref){
+	Aluno *aluno = *aluno_ref;
+	free(aluno);
+	*aluno_ref = NULL;
+}
+
+void display_aluno(const Aluno *aluno){
+	printf("Nome: %s\nIdade: %d", aluno->nome, aluno->idade);
+	display_livro(aluno->livro_fav);
+}
+
+
+int main(void) {
+	
+	setlocale(LC_ALL, "Portuguese");
+	
+		Livro*LordOfTheRing=createLivro("Lord Of The Ring",280,129);
+	Livro*CalicedeFogo=createLivro("Cálice de Fogo",300,70);
+	
+	LordOfTheRing->preco=400.0;
+	CalicedeFogo->preco=200.0;
+	
+	Aluno*Bob=createAluno("Bob",30,LordOfTheRing);
+	Aluno*Mariana=createAluno("Mariana",19,CalicedeFogo);
+	
+	
+	printAluno(Bob);
+	printAluno(Mariana);
+	
+	deallocate_Livro(&LordOfTheRing);
+	deallocate_Livro(&CalicedeFogo);
+	deallocate_Aluno(&Bob);
+	deallocate_Aluno(&Mariana);
+	
+	
+	return 0;
+}
