@@ -38,7 +38,7 @@ void update_livro(Livro *livro_ref, float novoPreco){
 	livro_ref->preco = novoPreco;
 }
 void display_livro(Livro *livro){
-	printf("Livro: %s\nNúmero de páginas: %d\n Preço: %.2f", livro->titulo, livro->numeroPaginas, livro->preco);	
+	printf("Livro Favorito: %s\nNúmero de páginas: %d\nPreço: %.2f", livro->titulo, livro->numeroPaginas, livro->preco);	
 }
 
 Aluno *createAluno(char *nome, int idade, Livro *liv){
@@ -57,7 +57,7 @@ void deallocate_aluno(Aluno **aluno_ref){
 }
 
 void display_aluno(const Aluno *aluno){
-	printf("Nome: %s\nIdade: %d", aluno->nome, aluno->idade);
+	printf("Nome: %s\nIdade: %d\n", aluno->nome, aluno->idade);
 	display_livro(aluno->livro_fav);
 }
 
@@ -69,14 +69,20 @@ int main(void) {
 	Livro *LordOfTheRing = createLivro("Lord Of The Ring", 280, 129);
 	Livro *CalicedeFogo = createLivro("Cálice de Fogo", 300, 70);
 	
+	display_livro(LordOfTheRing);
+	printf("\n\n");
+    display_livro(CalicedeFogo);
+	
 	LordOfTheRing->preco=400.0;
 	CalicedeFogo->preco=200.0;
 	
-	Aluno *Bob = createAluno("Bob",30,LordOfTheRing);
-	Aluno *Mariana = createAluno("Mariana",19,CalicedeFogo);
+	printf("\n\n");
+	Aluno *Bob = createAluno("Bob", 30, LordOfTheRing);
+	Aluno *Mariana = createAluno("Mariana", 19, CalicedeFogo);
 	
 	
 	display_aluno(Bob);
+	printf("\n\n");
 	display_aluno(Mariana);
 	
 	deallocate_livro(&LordOfTheRing);
