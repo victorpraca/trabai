@@ -66,23 +66,23 @@ int main(void) {
 	
 	setlocale(LC_ALL, "Portuguese");
 	
-		Livro*LordOfTheRing=createLivro("Lord Of The Ring",280,129);
-	Livro*CalicedeFogo=createLivro("Cálice de Fogo",300,70);
+	Livro *LordOfTheRing = createLivro("Lord Of The Ring", 280, 129);
+	Livro *CalicedeFogo = createLivro("Cálice de Fogo", 300, 70);
 	
 	LordOfTheRing->preco=400.0;
 	CalicedeFogo->preco=200.0;
 	
-	Aluno*Bob=createAluno("Bob",30,LordOfTheRing);
-	Aluno*Mariana=createAluno("Mariana",19,CalicedeFogo);
+	Aluno *Bob = createAluno("Bob",30,LordOfTheRing);
+	Aluno *Mariana = createAluno("Mariana",19,CalicedeFogo);
 	
 	
-	printAluno(Bob);
-	printAluno(Mariana);
+	display_aluno(Bob);
+	display_aluno(Mariana);
 	
-	deallocate_Livro(&LordOfTheRing);
-	deallocate_Livro(&CalicedeFogo);
-	deallocate_Aluno(&Bob);
-	deallocate_Aluno(&Mariana);
+	deallocate_livro(&LordOfTheRing);
+	deallocate_livro(&CalicedeFogo);
+	deallocate_aluno(&Bob);
+	deallocate_aluno(&Mariana);
 	
 	
 	return 0;
